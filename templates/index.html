@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
+{% extends "base_template.html" %}
 
-  <title>Mockup Spreadsheet Extractor</title>
-  <meta name="description" content="Spreadsheet Extractor Mockup">
-  <meta name="author" content="Sherlock Holmes">
+{% block title %} Home {% endblock %}
 
-</head>
-
-<body>
-  <h1>Hello, this is a blank project</h1>
-</body>
-</html>
+{% block main %}
+ <h1>Hello, this is a test page</h1>
+ <a href="/upload-file">Upload page</a>
+ {% endblock %}

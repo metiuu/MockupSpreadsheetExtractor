@@ -1,0 +1,21 @@
+{% extends "base_template.html" %}
+
+{% block title %} Home {% endblock %}
+
+{% block main %}
+
+<h2>Upload File</h2>
+<hr>
+
+<form action="upload-file" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" name="xls" id="xls">
+          <label class="custom-file-label" for="xls">Select xls file...</label>
+        </div>
+      </div>
+
+      <button type="submit">Upload</button>
+</form>
+
+{% endblock %}
