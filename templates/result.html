@@ -1,0 +1,18 @@
+{% extends "base_template.html" %}
+
+{% block title %} Home {% endblock %}
+
+{% block main %}
+<h1>Result</h1>
+{% for i in data %}
+    
+        
+        <p>{{i[0]}}</p>    
+        <p>Total: {{i[1]}}</p>
+        <p>Last Workbook: {{i[2]}}</p>
+        <p>--------------------------------</p>
+      
+    
+{% endfor %}
+</p>
+{% endblock %}

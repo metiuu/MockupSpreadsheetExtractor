@@ -34,13 +34,18 @@ def upload_file():
 
             print("File upload successful")
             content = xlrd.open_workbook(file_contents=book.read())
+            students = []
             for sheet in content.sheets():
-                get_student_data(sheet)
+                student_data = get_student_data(sheet)
                 total = count_worksheets(sheet)
                 print('Total worksheets done:', total)
+                
+                lastworkbook = last_workbook(sheet)
+               
+
+                students.append([student_data, total, lastworkbook])
                 total = 0
-                last_workbook(sheet)
-            return redirect(request.url)
+            return render_template("result.html", data=students)
 
     return render_template("upload_file.html")
 
@@ -58,10 +63,18 @@ def check_file_type(filename):
 
 def get_student_data(sheet):
     # extract data from specific cells
-    print('Student name:',sheet.cell(1,7).value)
-    print('Subject:',sheet.cell(2,1).value)
-    print('Month:',sheet.cell(2,0).value, int(sheet.cell(2,3).value))
+    # print('Student name:',sheet.cell(1,7).value)
+    # print('Subject:',sheet.cell(2,1).value)
+    # print('Month:',sheet.cell(2,0).value, int(sheet.cell(2,3).value))
+    
+
+    result = f"Student Name: {sheet.cell(1,7).value}\nSubject: {sheet.cell(2, 1).value}\nMonth: {sheet.cell(2,0).value}, {int(sheet.cell(2,3).value)}"
+    print(result)
+
     print()
+
+    return result
+
 
 def count_worksheets(sheet):
     total = 0
@@ -76,7 +89,12 @@ def count_worksheets(sheet):
 def last_workbook(sheet):
     # last workbook done (last row of spreadsheet, don't know how many rows there are)
     # last row(starting row 6), columns 2 and 3
-    print('Last worksheet done:', sheet.col_values(1,5)[-1] + ' ' + str(int(sheet.col_values(2,5)[-1])))
+    # print('Last worksheet done:', sheet.col_values(1,5)[-1] + ' ' + str(int(sheet.col_values(2,5)[-1])))
+
+    temp = sheet.col_values(
+        1, 5)[-1] + ' ' + str(int(sheet.col_values(2, 5)[-1]))
+    result = f'{temp}'
+    return result
     
 
 
