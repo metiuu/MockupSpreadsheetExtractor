@@ -33,6 +33,8 @@ def upload_file():
                 filename = secure_filename(spreadsheet.filename)
 
             print("File upload successful")
+            content = xlrd.open_workbook(file_contents=spreadsheet.read())
+            get_student_data(content)
             return redirect(request.url)
 
     return render_template("upload_file.html")
